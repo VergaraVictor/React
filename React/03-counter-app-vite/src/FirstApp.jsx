@@ -14,7 +14,7 @@ const getResult = (a, b) => {
 
 
 export const FirstApp = () => {
-
+    
     return (
         <>  
             {/* <h1>{'MensajeVergara'}</h1> */}
