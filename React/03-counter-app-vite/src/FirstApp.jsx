@@ -11,11 +11,14 @@
 // const getResult = (a, b) => {
 //     return a + b;
 // }
-
+import PropTypes from 'prop-types';
 
 export const FirstApp = ({ title, subTitle }) => {
 
-    // console.log(title);
+    // console.log(props);
+    // if ( !title ) {
+    //     throw new Error('El title no existe');
+    // }
 
     return (
         <>  
@@ -23,7 +26,12 @@ export const FirstApp = ({ title, subTitle }) => {
             {/* <code>{ JSON.stringify( newMessage ) }</code> */}
             {/* <h1>{ getResult(1,2) }</h1> */}
             <h1>{ title }</h1>
-            <p>{ subTitle + 1 }</p>
+            <p>{ subTitle }</p>
         </>
     );
+}
+
+FirstApp.propTypes = {
+    title: PropTypes.string.isRequired,
+    subTitle: PropTypes.number.isRequired,
 }
