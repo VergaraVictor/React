@@ -1,7 +1,7 @@
 
 // Desestructuración
 // Asignación Desestructurante
-const persona = {
+export const persona = {
     nombre: 'Tony',
     edad: 45,
     clave: 'Ironman'
@@ -13,7 +13,7 @@ const persona = {
 // console.log( edad );
 // console.log( clave );
 
-const usContext = ({ clave, nombre, edad, rango = 'Capitán' }) => {
+export const usContext = ({ clave, nombre, edad, rango = 'Capitán' }) => {
 
 
     // console.log( nombre, edad, rango );
