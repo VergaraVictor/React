@@ -29,7 +29,7 @@ export const FirstApp = ({ title, subTitle, name }) => {
             <p>{ subTitle }</p>
             <p>{ name }</p>
         </>
-    );
+    )
 }
 
 FirstApp.propTypes = {
@@ -40,5 +40,5 @@ FirstApp.propTypes = {
 FirstApp.defaultProps = {
     name: 'Víctor Vergara',
     subTitle: 'No hay subtitulo',
-    title: 'No hay titulo',
+    // title: 'No hay titulo',
 }
