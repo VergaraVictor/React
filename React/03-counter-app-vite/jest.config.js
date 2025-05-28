@@ -9,3 +9,8 @@ export default {
     '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/__mocks__/fileMock.js',
   }
 };
+
+// module.exports = {
+//   //TODO: jsdom,
+//   setupFiles: ['./jest.setup.js']
+// };
