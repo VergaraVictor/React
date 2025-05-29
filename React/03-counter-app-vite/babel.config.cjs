@@ -1,7 +1,7 @@
 // babel.config.cjs
 module.exports = {
   presets: [
-    ['@babel/preset-env', { targets: { esmodules: true } }], // or { node: 'current' }
-    '@babel/preset-react'
+    [ '@babel/preset-env', { targets: { esmodules: true } } ],
+    [ '@babel/preset-react', { runtime: 'automatic' } ],
   ],
 };
