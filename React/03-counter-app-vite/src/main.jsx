@@ -7,7 +7,7 @@ import { CounterApp } from "./CounterApp";
 
 ReactDOM.createRoot(document.getElementById('root') ).render(
     <React.StrictMode>
-        <FirstApp title="Hola, Soy Vegeta" />
+        <FirstApp title="Hola, Soy Vegeta" subTitle={"No hay subtítulo"} name={"Víctor Vergara"} />
         {/* <CounterApp value={ 20 } /> */}
     
     </React.StrictMode>
