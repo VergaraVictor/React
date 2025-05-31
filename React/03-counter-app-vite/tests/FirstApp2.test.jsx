@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { FirstApp } from '../../src/FirstApp';
+import { FirstApp } from '../src/FirstApp';
 
 describe('Pruebasa en <FirstApp />', () => {
 
