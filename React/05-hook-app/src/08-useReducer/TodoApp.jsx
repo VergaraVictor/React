@@ -21,6 +21,11 @@ const init = () => {
 }
 
 export const TodoApp = () => {
+
+    // useTodo
+    // todos, handleDeleteTodo, handleToggleTodo, handleNewTodo
+
+    const { todos, handleDeleteTodo, handleToggleTodo, handleNewTodo } = useTodos();
     
     const [ todos, dispatch ] = useReducer( todoReducer, initialState, init );
 
