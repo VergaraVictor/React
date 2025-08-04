@@ -31,6 +31,7 @@ describe('Pruebas en <TodoItem />', () => {
 
         const spanElement = screen.getByLabelText('span');
         expect( spanElement.className ).toContain('align-self-center');
+        expect( spanElement.className ).not.toContain('align-self-center');
 
         // screen.debug();
 
