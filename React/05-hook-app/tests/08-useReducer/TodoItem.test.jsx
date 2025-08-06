@@ -20,7 +20,7 @@ describe('Pruebas en <TodoItem />', () => {
             <TodoItem 
                 todo={ todo } 
                 onToggleTodo={ onToggleTodoMock } 
-                onDeleteTodoMock={ onDeleteTodoMock } 
+                onDeleteTodo={ onDeleteTodoMock } 
             />
         );
 
@@ -45,7 +45,7 @@ describe('Pruebas en <TodoItem />', () => {
             <TodoItem 
                 todo={ todo } 
                 onToggleTodo={ onToggleTodoMock } 
-                onDeleteTodoMock={ onDeleteTodoMock } 
+                onDeleteTodo={ onDeleteTodoMock } 
             />
         );
 
@@ -62,7 +62,7 @@ describe('Pruebas en <TodoItem />', () => {
             <TodoItem 
                 todo={ todo } 
                 onToggleTodo={ onToggleTodoMock } 
-                onDeleteTodoMock={ onDeleteTodoMock } 
+                onDeleteTodo={ onDeleteTodoMock } 
             />
         );
 
@@ -79,7 +79,7 @@ describe('Pruebas en <TodoItem />', () => {
             <TodoItem 
                 todo={ todo } 
                 onToggleTodo={ onToggleTodoMock } 
-                onDeleteTodoMock={ onDeleteTodoMock } 
+                onDeleteTodo={ onDeleteTodoMock } 
             />
         );
 
