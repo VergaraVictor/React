@@ -3,14 +3,19 @@ import { useState } from "react";
 const colors = {
     red: 'bg-red-500 animate-pulse',
     yellow: 'bg-yellow-500 animate-pulse',
-    green: 'bg-green-500 animate-pulse'
-}
+    green: 'bg-green-500 animate-pulse',
+    // blue: 'bg-blue-500 animate-pulse',
+    // pink: 'bg-pink-500 animate-pulse'
+};
+
+// type TrafficLightColor = 'red' | 'yellow' | 'green' | 'blue';
+type TrafficLightColor = keyof typeof colors;
 
 export const TrafficLight = () => {
 
-    const [light, setlight] = useState('red');
+    const [light, setlight] = useState<TrafficLightColor>('red');
 
-    const handleColorChange = (color: string) => {
+    const handleColorChange = (color: TrafficLightColor) => {
 
         setlight((prev) => {
             console.log({ prev });
