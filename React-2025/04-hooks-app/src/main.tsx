@@ -4,7 +4,8 @@ import { createRoot } from 'react-dom/client'
 // import { HooksApp } from './HooksApp'
 
 import './index.css';
-import { TrafficLightWithEffectWithHook } from './02-useEffect/TrafficLightWithEffectWithHook';
+import { PokemonPage } from './03-examples/PokemonPage';
+// import { TrafficLightWithEffectWithHook } from './02-useEffect/TrafficLightWithEffectWithHook';
 // import { TrafficLight } from './01-useState/TrafficLight';
 // import { TrafficLightWithEffect } from './02-useEffect/TrafficLightWithEffect';
 
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <HooksApp /> */}
     {/* <TrafficLight /> */}
     {/* <TrafficLightWithEffect /> */}
-    <TrafficLightWithEffectWithHook />
+    {/* <TrafficLightWithEffectWithHook /> */}
+    <PokemonPage />
   </StrictMode>,
 )
