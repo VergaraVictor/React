@@ -16,11 +16,6 @@ export interface ScrambleWordsState {
     totalWords: number;
 }
 
-export type ScrambleWordsAction =
-    | { type: 'NO_TENGO_LA_MENOR_IDEA_CUALES_ACCIONES_NECESITO' }
-    | { type: 'NO_TENGO_LA_MENOR_IDEA_CUALES_ACCIONES_NECESITO2' }
-    | { type: 'NO_TENGO_LA_MENOR_IDEA_CUALES_ACCIONES_NECESITO3' };
-
 const GAME_WORDS = [
     'REACT',
     'JAVASCRIPT',
@@ -70,13 +65,21 @@ export const getInitialState = (): ScrambleWordsState => {
         words: shuffleWords,
         totalWords: shuffleWords.length,
     }
-}
+};
 
-export const scrambleWordsReducer = (state: ScrambleWordsState, action: ScrambleWordsAction) => {
+export type ScrambleWordsAction =
+    | { type: 'NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO' }
+    | { type: 'NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO2' }
+    | { type: 'NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO3' };
+
+export const scrambleWordsReducer = (
+    state: ScrambleWordsState,
+    action: ScrambleWordsAction
+) => {
 
     switch (action.type) {
 
         default:
             return state;
     }
-}
+};
