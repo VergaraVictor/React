@@ -82,6 +82,8 @@ export const ScrambleWords = () => {
     };
 
     const handleSkip = () => {
+        dispatch({ type: 'SKIP_WORD' });
+
         // if (skipCounter >= maxSkips) return;
 
         // const updatedWords = words.splice(1);
@@ -94,6 +96,7 @@ export const ScrambleWords = () => {
     };
 
     const handlePlayAgain = () => {
+        dispatch({ type: 'START_NEW_GAME', payload: getInitialState() });
         // const newArray = shuffleArray(GAME_WORDS);
 
         // setPoints(0);
