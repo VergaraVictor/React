@@ -5,7 +5,8 @@ import { Toaster } from 'sonner'
 // import { HooksApp } from './HooksApp'
 
 import './index.css';
-import { InstagromApp } from './07-useOptimistic/InstagromApp';
+import { ClienteInformation } from './08-use-suspense/ClienteInformation';
+// import { InstagromApp } from './07-useOptimistic/InstagromApp';
 // import { MemoCounter } from './06-memos/MemoCounter';
 // import { MemoHook } from './06-memos/MemoHook';
 // import { ScrambleWords } from './05-useReducer/reducer/ScrambleWords';
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <ScrambleWords /> */}
     {/* <MemoHook /> */}
     {/* <MemoCounter /> */}
-    <InstagromApp />
+    {/* <InstagromApp /> */}
+    <ClienteInformation id={100} />
   </StrictMode>,
 )
