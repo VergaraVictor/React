@@ -5,8 +5,9 @@ import { Toaster } from 'sonner'
 // import { HooksApp } from './HooksApp'
 
 import './index.css';
-import { ClienteInformation } from './08-use-suspense/ClienteInformation';
-import { getUserAction } from './08-use-suspense/api/get-user.actions';
+import { ProfessionalApp } from './09-useContext/ProfessionalApp';
+// import { ClienteInformation } from './08-use-suspense/ClienteInformation';
+// import { getUserAction } from './08-use-suspense/api/get-user.actions';
 // import { InstagromApp } from './07-useOptimistic/InstagromApp';
 // import { MemoCounter } from './06-memos/MemoCounter';
 // import { MemoHook } from './06-memos/MemoHook';
@@ -32,7 +33,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <MemoHook /> */}
     {/* <MemoCounter /> */}
     {/* <InstagromApp /> */}
-    <Suspense
+    {/* <Suspense
       fallback={
         <div className="bg-gradient flex flex-col">
           <h1 className="text-2xl">Cargando</h1>
@@ -40,6 +41,7 @@ createRoot(document.getElementById('root')!).render(
       }
     >
       <ClienteInformation getUser={getUserAction(1001)} />
-    </Suspense>
+    </Suspense> */}
+    <ProfessionalApp />
   </StrictMode>,
 )
