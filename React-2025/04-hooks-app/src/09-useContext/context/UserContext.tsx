@@ -1,4 +1,4 @@
-import { type PropsWithChildren, createContext, useState, } from "react";
+import { type PropsWithChildren, createContext, useState, useEffect } from "react";
 import { users, type User } from "../data/user-mock.data";
 
 // interface UserContextProps {
@@ -17,7 +17,7 @@ interface UserContextProps {
     logout: () => void;
 }
 
-export const UserContext = createContext({} as UserContextProps)
+export const UserContext = createContext({} as UserContextProps);
 
 
 // HOC higher-order component 
@@ -38,6 +38,7 @@ export const UserContextProvider = ({ children }: PropsWithChildren) => {
 
         setUser(user);
         setAuthStatus('autenticated');
+        localStorage.setItem('userId', userId.toString())
         return true;
     }
 
@@ -45,13 +46,28 @@ export const UserContextProvider = ({ children }: PropsWithChildren) => {
         console.log('logout');
         setAuthStatus('not-authenticated');
         setUser(null);
+        localStorage.removeItem('userId');
     };
 
-    return <UserContext value={{
-        authStatus: AuthStatus,
-        user: user,
-        login: handleLogin,
-        logout: handleLogout
-    }}>{children}</UserContext >;
+    useEffect(() => {
+        const storedUserId = localStorage.getItem('userId');
+        if (storedUserId) {
+            handleLogin(+storedUserId);
+            return;
+        } 
+
+        handleLogout();
+    },[]);
+
+    return <UserContext 
+        value={{
+            authStatus: AuthStatus,
+            user: user,
+            login: handleLogin,
+            logout: handleLogout
+        }}
+    >   
+        {children}
+    </UserContext>;
 };
 
