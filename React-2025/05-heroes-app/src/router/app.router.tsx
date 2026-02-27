@@ -4,10 +4,11 @@ import { AdminPage } from "@/admin/pages/AdminPage";
 import { HeroesLayout } from "@/heroes/layouts/HeroesLayout";
 import { HeroPage } from "@/heroes/pages/hero/HeroPage";
 import { HomePage } from "@/heroes/pages/home/HomePage";
+import SearchPage from "@/heroes/pages/search/SearchPage";
 
 // import { SearchPage } from "@/heroes/pages/search/SearchPage";
 
-const SearchPage = lazy(() => import('@/heroes/pages/search/SearchPage'));
+// const SearchPage = lazy(() => import('@/heroes/pages/search/SearchPage'));
 
 
 export const appRouter = createBrowserRouter([
@@ -41,3 +42,7 @@ export const appRouter = createBrowserRouter([
     },
 ])
 
+
+function lazy(arg0: () => Promise<typeof import("@/heroes/pages/search/SearchPage")>) {
+    throw new Error("Function not implemented.");
+}
