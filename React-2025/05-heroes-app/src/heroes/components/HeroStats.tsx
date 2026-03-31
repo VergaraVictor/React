@@ -1,16 +1,17 @@
 import { Badge } from "@/components/ui/badge"
 import { Heart, Trophy, Users, Zap } from "lucide-react"
 import { HeroStatCard } from "./HeroStatCard"
-import { useQuery } from "@tanstack/react-query"
-import { getSummaryAction } from "../actions/get-summary.actions"
+import { useHeroSummary } from "../hooks/useHeroSummary"
 
 export const HeroStats = () => {
 
-    const { data: summary } = useQuery({
-        queryKey: ['summary-information'],
-        queryFn: getSummaryAction,
-        staleTime: 1000 * 60 * 5, // 5 minutos
-    });
+    // const { data: summary } = useQuery({
+    //     queryKey: ['summary-information'],
+    //     queryFn: getSummaryAction,
+    //     staleTime: 1000 * 60 * 5, // 5 minutos
+    // }); //cuando el codigo se repite como en el HomePage lo mejor es craerse un hook
+
+    const { data: summary } = useHeroSummary();
 
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
