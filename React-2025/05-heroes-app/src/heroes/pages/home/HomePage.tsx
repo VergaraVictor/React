@@ -16,6 +16,7 @@ export const HomePage = () => {
   const activeTab = searchParams.get('tab') ?? 'all';
   const page = searchParams.get('page') ?? '1';
   const limit = searchParams.get('limit') ?? '6';
+  const category = searchParams.get('category') ?? 'aa';
 
   const selectedTab = useMemo(() => {
     const validTabs = ['all', 'favorites', 'heroes', 'villains'];
@@ -28,7 +29,7 @@ export const HomePage = () => {
   //   queryFn: () => getHeroesByPageAction(+page, +limit),
   //   staleTime: 1000 * 60 * 5, // 5 minutos
   // });
-  const { data: heroesResponse } = usePaginatedHero(+page, +limit);
+  const { data: heroesResponse } = usePaginatedHero(+page, +limit, category);
 
 
   // const { data: summary } = useQuery({
@@ -60,7 +61,9 @@ export const HomePage = () => {
               value="all"
               onClick={() =>
                 setSearchParams((prev) => {
-                  prev.set('tab', 'all')
+                  prev.set('tab', 'all');
+                  prev.set('category', 'all');
+                  prev.set('page', '1');
                   return prev;
                 })
               }
@@ -72,7 +75,7 @@ export const HomePage = () => {
               className="flex items-center gap-2"
               onClick={() =>
                 setSearchParams((prev) => {
-                  prev.set('tab', 'favorites')
+                  prev.set('tab', 'favorites');
                   return prev;
                 })
               }
@@ -83,7 +86,9 @@ export const HomePage = () => {
               value="heroes"
               onClick={() =>
                 setSearchParams((prev) => {
-                  prev.set('tab', 'heroes')
+                  prev.set('tab', 'heroes');
+                  prev.set('category', 'hero');
+                  prev.set('page', '1');
                   return prev;
                 })
               }
@@ -94,7 +99,9 @@ export const HomePage = () => {
               value="villains"
               onClick={() =>
                 setSearchParams((prev) => {
-                  prev.set('tab', 'villains')
+                  prev.set('tab', 'villains');
+                  prev.set('category', 'villain');
+                  prev.set('page', '1');
                   return prev;
                 })
               }
@@ -115,12 +122,12 @@ export const HomePage = () => {
           <TabsContent value="heroes">
             {/* Mostrar todos los héroes */}
             <h1>Héroes</h1>
-            <HeroGrid heroes={[]} />
+            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
           </TabsContent>
           <TabsContent value="villains">
             {/* Mostrar todos los villanos */}
             <h1>Villanos</h1>
-            <HeroGrid heroes={[]} />
+            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
           </TabsContent>
         </Tabs>
 
