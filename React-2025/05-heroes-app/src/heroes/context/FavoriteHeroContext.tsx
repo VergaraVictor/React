@@ -14,7 +14,7 @@ interface FavoriteHeroContextValue {
 export const FavoriteHeroContext = createContext({} as FavoriteHeroContextValue);
 
 const getFavoritesFromLocalStorage = (): Hero[] => {
-    const favorites = localStorage.getItem('favorite');
+    const favorites = localStorage.getItem('favorites');
     return favorites ? JSON.parse(favorites) : [];
 };
 
@@ -39,7 +39,7 @@ export const FavoriteHeroProvider = ({ children }: PropsWithChildren) => {
     };
 
     useEffect(() => {
-        localStorage.setItem('favorite', JSON.stringify(favorites));
+        localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
 
     return (
