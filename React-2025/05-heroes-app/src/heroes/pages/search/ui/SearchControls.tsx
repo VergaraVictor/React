@@ -16,6 +16,7 @@ export const SearchControls = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const activeAccordion = searchParams.get('active-accordion') ?? '';
+    const selectedStrength = Number(searchParams.get('strength') ?? '0');
 
     const setQueryParams = (name: string, value: string) => {
         setsearchParams(prev => {
@@ -57,6 +58,10 @@ export const SearchControls = () => {
                         onClick={()=> {
                             if ( activeAccordion === 'advance-filters' ) {
                                 setQueryParams('active-accordion', '');
+                                // setsearchParams((prev) => {
+                                //     prev.delete('active-accordion');
+                                //     return prev;
+                                // });
                                 return;
                             }
 
@@ -121,8 +126,15 @@ export const SearchControls = () => {
                                     </div>
                                 </div>
                                 <div className="mt-4">
-                                    <label className="text-sm font-medium">Minimum Strength: 0/10</label>
-                                    <Slider defaultValue={[5]} max={10} step={1} />
+                                    <label className="text-sm font-medium">Minimum Strength: {selectedStrength}/10</label>
+                                    <Slider 
+                                        defaultValue={[selectedStrength]}
+                                        onValueChange={value => 
+                                            setQueryParams('strength', value[0].toString())
+                                        } 
+                                        max={10} 
+                                        step={1} 
+                                    />
                                 </div>
                             </div>
                         </AccordionContent>
