@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHeroesByPageAction } from "../actions/get-herores-by-page.action";
+import { getHeroesByPageAction } from "../actions/get-heroes-by-page.action";
 
 export const usePaginatedHero = (page: number, limit: number, category: 'all') => {
     return useQuery({
