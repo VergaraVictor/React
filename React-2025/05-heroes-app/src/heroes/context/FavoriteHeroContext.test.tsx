@@ -1,8 +1,14 @@
 
 import { use } from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { FavoriteHeroContext, FavoriteHeroProvider } from "./FavoriteHeroContext";
+import type { Hero } from '../types/hero.interface';
+
+const mockHero = {
+    id: '1',
+    name: 'batman',
+} as Hero;
 
 const TestComponent = () => {
     
@@ -22,6 +28,13 @@ const TestComponent = () => {
                     )) 
                 }
             </div>
+
+            <button data-testid="toggle-favorite"
+                onClick={() => toggleFavorite(mockHero)}
+            >
+                Toggle Favorite
+            </button>
+            <div data-testid="is-favorite">{ isFavorite(mockHero).toString() }</div>
         </div>
     );
 };
@@ -47,5 +60,19 @@ describe('FavoriteHeroContext', () => {
         expect(screen.getByTestId('favorite-count').textContent).toBe('0');
         expect(screen.getByTestId('favorites-list').children.length).toBe(0);
     });
+
+    test('should add hero to favorites when toggleFavorite is called with new Hero', () => {   
+        renderContextTest();
+        const button = screen.getByTestId('toggle-favorite');
+
+        fireEvent.click(button);
+        screen.debug();
+
+        expect(screen.getByTestId('is-favorite').textContent).toBe('true');
+        expect(screen.getByTestId('hero-1').textContent).toBe('batman');
+        expect(localStorage.getItem('favorites')).toBe('[{"id":"1","name":"batman"}]');
+        expect(screen.getByTestId('favorite-count').textContent).toBe('1');
+        expect(screen.getByTestId('favorites-list').children.length).toBe(1);
+    }); 
 
 });
