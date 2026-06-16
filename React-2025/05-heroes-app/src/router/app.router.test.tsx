@@ -22,6 +22,10 @@ vi.mock('@/heroes/pages/hero/HeroPage', () => ({
     },
 }));
 
+vi.mock('@/heroes/pages/search/SearchPage', () => ({
+    default: () => <div data-testid="search-page"></div>
+}));
+
 
 describe('appRouter', () => {
     test('should be configured as expected', () => {
@@ -43,5 +47,15 @@ describe('appRouter', () => {
         render(<RouterProvider router={router} />);
         
         expect( screen.getByTestId('hero-page').innerHTML).toContain('superman');
+    });
+
+    test('should render search page at /search path', async () => {
+        
+        const router = createMemoryRouter(appRouter.routes, {
+            initialEntries: ['/search'],
+        });
+        render(<RouterProvider router={router} />);
+
+        expect(await screen.findByTestId('search-page')).toBeDefined();
     });
 });
