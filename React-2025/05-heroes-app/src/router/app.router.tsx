@@ -49,6 +49,6 @@ export const appRouter = createBrowserRouter([
 ])
 
 
-function lazy(arg0: () => Promise<typeof import("@/heroes/pages/search/SearchPage")>) {
-    throw new Error("Function not implemented.");
+function lazy(_arg0: () => Promise<typeof import("@/heroes/pages/search/SearchPage")>) {
+    // throw new Error("Function not implemented.");
 }

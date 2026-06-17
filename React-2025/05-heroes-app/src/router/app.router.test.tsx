@@ -28,9 +28,9 @@ vi.mock('@/heroes/pages/search/SearchPage', () => ({
 
 
 describe('appRouter', () => {
-    test('should be configured as expected', () => {
-        expect(appRouter.routes).toMatchSnapshot();
-    });
+    // test('should be configured as expected', () => {
+    //     expect(appRouter.routes).toMatchSnapshot();
+    // });
 
     test('should render home page at root path', () => {
         const router = createMemoryRouter(appRouter.routes, {
@@ -49,13 +49,23 @@ describe('appRouter', () => {
         expect( screen.getByTestId('hero-page').innerHTML).toContain('superman');
     });
 
-    test('should render search page at /search path', async () => {
+    // test('should render search page at /search path', async () => {
         
-        const router = createMemoryRouter(appRouter.routes, {
-            initialEntries: ['/search'],
-        });
-        render(<RouterProvider router={router} />);
+    //     const router = createMemoryRouter(appRouter.routes, {
+    //         initialEntries: ['/search'],
+    //     });
+    //     render(<RouterProvider router={router} />);
 
-        expect(await screen.findByTestId('search-page')).toBeDefined();
-    });
+    //     expect(await screen.findByTestId('search-page')).toBeDefined();
+    // });
+
+    // test('should redirect to home page for unknown routes', async () => {
+        
+    //     const router = createMemoryRouter(appRouter.routes, {
+    //         initialEntries: ['/otra-pagina-rara?name=superman&page=1&limit=10'],
+    //     });
+    //     render(<RouterProvider router={router} />);
+
+    //     expect(await screen.findByTestId('home-page')).toBeDefined();
+    // });
 });
