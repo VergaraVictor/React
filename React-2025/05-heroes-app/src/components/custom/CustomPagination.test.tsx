@@ -11,14 +11,13 @@ vi.mock('../ui/button', () => ({
     )
 }))
 
-const renderWithRouter = ( component: React.ReactElement ) => {
-    
-    return render(<MemoryRouter>{ component }</MemoryRouter>);
+const renderWithRouter = ( component: React.ReactElement, initialEntries?: string[], ) => {  
+    return render(<MemoryRouter initialEntries={initialEntries}>{ component }</MemoryRouter>);
 }
 
 describe('CustomPagination', () => {
     test('shoul render component with default values', () => {
-        renderWithRouter(<CustomPagination totalPages={5}/>);
+        renderWithRouter(<CustomPagination totalPages={6}/>);
 
         expect(screen.getByText('Anteriores')).toBeDefined();
         expect(screen.getByText('Siguientes')).toBeDefined();
@@ -28,5 +27,31 @@ describe('CustomPagination', () => {
         expect(screen.getByText('3')).toBeDefined();
         expect(screen.getByText('4')).toBeDefined();
         expect(screen.getByText('5')).toBeDefined();
+        expect(screen.getByText('6')).toBeDefined();
     });
+
+    test('should disabled previus button when page is 1', () => {
+        renderWithRouter(<CustomPagination totalPages={5}/>);
+        const previousButton = screen.getByText('Anteriores');
+        expect(previousButton.getAttributeNames()).toContain('disabled');
+
+    }); 
+
+    test('should disabled next button when we are in last page', () => {
+        renderWithRouter(<CustomPagination totalPages={5}/>, ['/?page=5']);
+        const nextButton = screen.getByText('Siguientes');
+        // screen.debug(nextButton);
+        expect(nextButton.getAttributeNames()).toContain('disabled');
+
+    }); 
+
+    test('should disabled button 3 when we are page 3', () => {
+        renderWithRouter(<CustomPagination totalPages={10}/>, ['/?page=3']);
+        const button2 = screen.getByText('2');
+        const button3 = screen.getByText('3');
+        // screen.debug(button2);
+        // screen.debug(button3);
+        expect(button2.getAttribute('variant')).toBe('outline');
+        expect(button3.getAttribute('variant')).toBe('default');
+    }); 
 });
