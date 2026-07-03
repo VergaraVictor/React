@@ -1,10 +1,9 @@
-import { render } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import SearchPage from "./SearchPage";
 import { MemoryRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { searchHeroesAction } from "@/heroes/actions/search-heros.actions";
-import { HeroGrid } from "@/heroes/components/HeroGrid";
 import type { Hero } from "@/heroes/types/hero.interface";
 
 vi.mock('@/heroes/actions/search-heros.actions');
@@ -83,6 +82,25 @@ describe('searchPage', () => {
         });
 
         expect(container).toMatchSnapshot();
+    });
+
+    test('should render HeroGrid with search search results', async() => {
+
+        const mockHeroes = [
+            { id: '1', name: 'Clark Kent' } as unknown as Hero,
+            { id: '2', name: 'Bruce Wayne' } as unknown as Hero,
+        ]
+
+        mockSearchHeroesAction.mockResolvedValue(mockHeroes)
+
+        renderSearchPage();
+
+        await waitFor(() => {
+            expect(screen.getByText('Clark Kent')).toBeDefined()
+            expect(screen.getByText('Clark Kent')).toBeDefined()
+        });
+
+
     });
 
 });
