@@ -1,7 +1,16 @@
 import { render, screen } from "@testing-library/react";
-import { describe, test } from "vitest";
+import { describe, expect, test } from "vitest";
 import { SearchControls } from "./SearchControls";
 import { MemoryRouter } from "react-router";
+
+if (typeof window.ResizeObserver === 'undefined'){
+    class ResizeObserver {
+        observe() {}
+        unobserve() {}
+        disconnect() {}
+    }
+    window.ResizeObserver = ResizeObserver;
+};
 
 
 const renderWithRouter = ( initialEntries: string[] = ['/'] ) => {
@@ -15,8 +24,8 @@ const renderWithRouter = ( initialEntries: string[] = ['/'] ) => {
 
 describe('SearchControls', () => {
     test('should render SearchControls with default values', () => {
-        renderWithRouter();
+        const { container } = renderWithRouter();
 
-        screen.debug();
+        expect(container).toMatchSnapshot();
     });
 });
