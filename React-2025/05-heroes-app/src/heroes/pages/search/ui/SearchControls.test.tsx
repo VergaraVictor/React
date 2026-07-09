@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { SearchControls } from "./SearchControls";
 import { MemoryRouter } from "react-router";
-import { Target } from "lucide-react";
+import { Key, Target } from "lucide-react";
 
 if (typeof window.ResizeObserver === 'undefined'){
     class ResizeObserver {
@@ -52,4 +52,38 @@ describe('SearchControls', () => {
         expect(input.getAttribute('value')).toBe('Superman');
 
     });
+
+    test('should change params strength when slider is changed', () => {
+
+        renderWithRouter(['/?name=Batman&active-accordion=advance-filters']);
+
+        const slider = screen.getByRole('slider')
+        expect(slider.getAttribute('aria-valuenow')).toBe('0');
+
+        fireEvent.keyDown(slider, { Key: 'ArrowRight' });
+
+        expect(slider.getAttribute('aria-valuenow')).toBe('0');
+    });
+
+    // test('should accordion be open when active-accordion param is set', () => {
+        
+    //     renderWithRouter(['/?name=Batman&active-accordion=advance-filters']);
+        
+    //     const accordion = screen.getByTestId('accordion');
+    //     const accordionItem = accordion.querySelector('div');
+
+    //     expect(accordionItem?.getAttribute('data-state')).toBe('open');
+
+    // });
+
+    // test('should accordion be closed when active-accordion param is set', () => {
+        
+    //     renderWithRouter(['/?name=Batman']);
+        
+    //     const accordion = screen.getByTestId('accordion');
+    //     const accordionItem = accordion.querySelector('div');
+
+    //     expect(accordionItem?.getAttribute('data-state')).toBe('closed');
+
+    // });
 });
