@@ -2,12 +2,14 @@ import { Search, ShoppingBag, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import { Input } from "@base-ui/react";
-import { useSearchParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
+import { cn } from "@/lib/utils";
 
 const CustomHeader = () => {
   const [cartCount] = useState(3);
 
   const [ searchParams, setSearchParams ] = useSearchParams();
+  const { gender } = useParams();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const query = searchParams.get('query') || '';  
@@ -40,18 +42,38 @@ const CustomHeader = () => {
 
           {/* Navigation - Desktop */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-sm font-medium transition-colors hover:text-primary">
-              Camisetas
-            </a>
-            <a href="#" className="text-sm font-medium transition-colors hover:text-primary">
-              Sudaderas
-            </a>
-            <a href="#" className="text-sm font-medium transition-colors hover:text-primary">
-              Chaquetas
-            </a>
-            <a href="#" className="text-sm font-medium transition-colors hover:text-primary">
-              Accesorios
-            </a>
+            <Link 
+              to="/" 
+              className={cn(`text-sm font-medium transition-colors hover:text-primary`,
+                !gender ? 'underline underline-offset-4' : ''
+              )}
+            >
+              Todos
+            </Link>
+            <Link 
+              to="/gender/men" 
+              className={cn(`text-sm font-medium transition-colors hover:text-primary`,
+                gender === 'men' ? 'underline underline-offset-4' : ''
+              )}
+            >
+              Hombres
+            </Link>
+            <Link 
+              to="/gender/women"
+              className={cn(`text-sm font-medium transition-colors hover:text-primary`,
+                gender === 'women' ? 'underline underline-offset-4' : ''
+              )}
+            >
+              Mujeres
+            </Link>
+            <Link 
+              to="/gender/kid" 
+              className={cn(`text-sm font-medium transition-colors hover:text-primary`,
+                gender === 'kid' ? 'underline underline-offset-4' : ''
+              )}
+            >
+              Niños
+            </Link>
           </nav>
 
           {/* Search and Cart */}
