@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProductByIdAction } from "../actions/getProductByIdAction";
 
 
 export const useProduct = (id: string) => {
@@ -17,4 +16,20 @@ export const useProduct = (id: string) => {
     return {
         ...query,
     }
+}
+
+async function getProductByIdAction(id: string): Promise<any> {
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+    if (!apiUrl) {
+        throw new Error("VITE_API_URL is not configured.");
+    }
+
+    const response = await fetch(`${apiUrl.replace(/\/$/, '')}/products/${encodeURIComponent(id)}`);
+
+    if (!response.ok) {
+        throw new Error(`Could not load product (${response.status}).`);
+    }
+
+    return response.json();
 }
