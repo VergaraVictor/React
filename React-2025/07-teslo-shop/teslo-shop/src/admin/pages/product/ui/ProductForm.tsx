@@ -52,11 +52,10 @@ export const ProductForm = ({ title, subTitle, product }: Props) => {
     setValue('sizes', Array.from(sizeSet));
   };
 
-  const removeSize = (sizeToRemove: string) => {
-    // setProduct((prev) => ({
-    //   ...prev,
-    //   sizes: prev.sizes.filter((size) => size !== sizeToRemove),
-    // }));
+  const removeSize = (size: Size) => {
+    const sizeSet = new Set( getValues('sizes') );
+    sizeSet.delete(size);
+    setValue('sizes', Array.from(sizeSet));
   };
 
   const handleDrag = (e: React.DragEvent) => {
@@ -281,8 +280,8 @@ export const ProductForm = ({ title, subTitle, product }: Props) => {
                     >
                       {size}
                       <button
-                        // onClick={() => removeSize(size)}
-                        className="ml-2 text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                        onClick={() => removeSize(size)}
+                        className="cursor-pointer ml-2 text-blue-600 hover:text-blue-800 transition-colors duration-200"
                       >
                         <X className="h-3 w-3" />
                       </button>
@@ -344,6 +343,13 @@ export const ProductForm = ({ title, subTitle, product }: Props) => {
                     // value={newTag}
                     // onChange={(e) => setNewTag(e.target.value)}
                     // onKeyDown={(e) => e.key === 'Enter' && addTag()}
+                    onKeyDown={(e) => {
+                        if ( e.key === 'Enter' || e.key === ' ' || e.key === ',' ) {
+                          // TODO: Hacer el código}
+                          addTag()
+                        }
+                      } 
+                    }
                     placeholder="Añadir nueva etiqueta..."
                     className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   />
