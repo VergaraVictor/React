@@ -27,7 +27,7 @@ interface Product {
 export const AdminProductPage = () => {
   const { id } = useParams();
 
-  const { isLoading, isError, data: product } = useProduct(id || '');
+  const { isLoading, isError, data: product, handleSubmitForm, } = useProduct(id || '');
 
   const title = id === 'new' ? 'Nuevo producto' : 'Editar producto';
   const subtitle =
@@ -47,6 +47,11 @@ export const AdminProductPage = () => {
     return <Navigate to='/admin/products' />; 
   }
 
-  return <ProductForm  title={title} subTitle={subtitle} product={product } />;
+  return <ProductForm  
+    title={title} 
+    subTitle={subtitle} 
+    product={product }
+    onSubmit={handleSubmitForm} 
+  />;
 
 };
