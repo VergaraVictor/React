@@ -1,11 +1,14 @@
 import { tesloApi } from "@/api/tesloApi";
 import type { Product } from "@/interfaces/product.interface";
+import { sleep } from "@/lib/sleep";
 
 
 
 export const createUpdateProductAction = async (
     productLike: Partial<Product>
 ): Promise<Product> => {
+
+    await sleep(1500);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, user, images= [], ...rest } = productLike;
