@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getProductByIdAction } from '@/admin/actions/product.action';
 import type { Product } from "@/interfaces/product.interface";
 import { createUpdateProductAction } from '../actions/create-update-product.actions';
@@ -6,6 +6,8 @@ import { createUpdateProductAction } from '../actions/create-update-product.acti
 
 
 export const useProduct = (id: string) => {
+
+    const queryClient = useQueryClient();
 
     const query = useQuery({
         queryKey: ['product', { id }],
@@ -19,9 +21,9 @@ export const useProduct = (id: string) => {
     const mutation = useMutation({
         mutationFn: createUpdateProductAction,
         onSuccess: (product: Product) => {
-            console.log('Todo salió bien', product);
-            // TODO:
             // Invalidar caché
+            queryClient.invalidateQueries({queryKey: ['products']});
+    
             // Actualizar queryData
         },
     })
