@@ -23,8 +23,12 @@ export const useProduct = (id: string) => {
         onSuccess: (product: Product) => {
             // Invalidar caché
             queryClient.invalidateQueries({queryKey: ['products']});
+            queryClient.invalidateQueries({
+                queryKey: ['products', { id: product.id }]
+            });
     
             // Actualizar queryData
+            queryClient.setQueryData(['products', {id: product.id}], product);
         },
     })
 
