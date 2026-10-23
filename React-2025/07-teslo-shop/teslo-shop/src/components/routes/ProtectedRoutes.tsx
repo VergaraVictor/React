@@ -1,33 +1,32 @@
-import { useAuthStore } from '@/auth/store/auth.store';
-import type { PropsWithChildren } from 'react';
-import { Navigate } from 'react-router';
+import { useAuthStore } from "@/auth/store/auth.store"
+import type { PropsWithChildren } from "react"
+import { Navigate } from "react-router";
 
-export const AuthenticatedRoute = ({ children }: PropsWithChildren) => {
-  const { authStatus } = useAuthStore();
-  if (authStatus === 'checking') return null;
+export const AuthenticatedRoute = ({children}: PropsWithChildren) => {
+    const { authStatus } = useAuthStore();
+    if( authStatus === 'checking' ) return null
+    
+    if( authStatus === 'not-authenticated' ) return <Navigate to='/auth/login' />;
 
-  if (authStatus === 'not-authenticated') return <Navigate to="/auth/login" />;
+    return  children;
+}
 
-  return children;
-};
+export const NotAuthenticatedRoute = ({children}: PropsWithChildren) => {
+    const { authStatus } = useAuthStore();
+    if( authStatus === 'checking' ) return null
+    
+    if( authStatus === 'authenticated' ) return <Navigate to='/' />;
 
-export const NotAuthenticatedRoute = ({ children }: PropsWithChildren) => {
-  const { authStatus } = useAuthStore();
-  if (authStatus === 'checking') return null;
+    return  children;
+}
 
-  if (authStatus === 'authenticated') return <Navigate to="/" />;
+export const AdminRoute = ({children}: PropsWithChildren) => {
+    const { authStatus, isAdmin } = useAuthStore();
+    if( authStatus === 'checking' ) return null
+    
+    if( authStatus === 'not-authenticated' ) return <Navigate to='/auth/login' />;
 
-  return children;
-};
+    if( !isAdmin() ) return <Navigate to='/' />
 
-export const AdminRoute = ({ children }: PropsWithChildren) => {
-  const { authStatus, isAdmin } = useAuthStore();
-
-  if (authStatus === 'checking') return null;
-
-  if (authStatus === 'not-authenticated') return <Navigate to="/auth/login" />;
-
-  if (!isAdmin()) return <Navigate to="/" />;
-
-  return children;
-};
+    return  children;
+}
