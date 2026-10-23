@@ -1,7 +1,10 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router';
+
 import { useForm } from 'react-hook-form';
+
 import { AdminTitle } from '@/admin/components/AdminTitle';
+
 import { Button } from '@/components/ui/button';
 import type { Product, Size } from '@/interfaces/product.interface';
 import { X, SaveAll, Tag, Plus, Upload } from 'lucide-react';
@@ -19,11 +22,17 @@ interface Props {
 
 const availableSizes: Size[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
-export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: Props) => {
+export const ProductForm = ({
+  title,
+  subTitle,
+  product,
+  onSubmit,
+  isPending,
+}: Props) => {
   const [dragActive, setDragActive] = useState(false);
-  const { 
-    register, 
-    handleSubmit, 
+  const {
+    register,
+    handleSubmit,
     formState: { errors },
     getValues,
     setValue,
@@ -40,8 +49,8 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
 
   const addTag = () => {
     const newTag = labelInputRef.current!.value;
-    if (!newTag.trim()) return;
-    
+    if (newTag === '') return;
+
     const newTagSet = new Set(getValues('tags'));
     newTagSet.add(newTag);
     setValue('tags', Array.from(newTagSet));
@@ -54,13 +63,13 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
   };
 
   const addSize = (size: Size) => {
-    const sizeSet = new Set( getValues('sizes') );
+    const sizeSet = new Set(getValues('sizes'));
     sizeSet.add(size);
     setValue('sizes', Array.from(sizeSet));
   };
 
   const removeSize = (size: Size) => {
-    const sizeSet = new Set( getValues('sizes') );
+    const sizeSet = new Set(getValues('sizes'));
     sizeSet.delete(size);
     setValue('sizes', Array.from(sizeSet));
   };
@@ -89,12 +98,11 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
   };
 
   return (
-    <form onSubmit={ handleSubmit(onSubmit) }>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex justify-between items-center">
         <AdminTitle title={title} subtitle={subTitle} />
         <div className="flex justify-end mb-10 gap-4">
-          <Button variant="outline"
-          type="button">
+          <Button variant="outline" type="button">
             <Link to="/admin/products" className="flex items-center gap-2">
               <X className="w-4 h-4" />
               Cancelar
@@ -137,9 +145,10 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                     placeholder="Título del producto"
                   />
                   {errors.title && (
-                      <p className="text-red-500 text-sm">El título es requerido</p>
-                    )
-                  }
+                    <p className="text-red-500 text-sm">
+                      El título es requerido
+                    </p>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -162,9 +171,10 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                       placeholder="Precio del producto"
                     />
                     {errors.price && (
-                        <p className="text-red-500 text-sm">El precio debe ser mayor a 0</p>
-                      )
-                    }
+                      <p className="text-red-500 text-sm">
+                        El precio debe de ser mayor a 0
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -186,9 +196,10 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                       placeholder="Stock del producto"
                     />
                     {errors.stock && (
-                        <p className="text-red-500 text-sm">El stock debe ser mayor a 0</p>
-                      )
-                    }
+                      <p className="text-red-500 text-sm">
+                        El inventario debe de ser mayor a 0
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -200,7 +211,9 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                     type="text"
                     {...register('slug', {
                       required: true,
-                      validate: (value) => !/\s/.test(value) || 'El slug no puede contener espacios en blanco',
+                      validate: (value) =>
+                        !/\s/.test(value) ||
+                        'El slug no puede contener espacios en blanco',
                     })}
                     className={cn(
                       'w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
@@ -211,11 +224,10 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                     placeholder="Slug del producto"
                   />
                   {errors.slug && (
-                      <p className="text-red-500 text-sm">
-                        {errors.slug.message || 'El slug es requerido.'}
-                      </p>
-                    )
-                  }
+                    <p className="text-red-500 text-sm">
+                      {errors.slug.message || 'El slug es requerido.'}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -242,7 +254,7 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                     Descripción del producto
                   </label>
                   <textarea
-                    {...register('description', {required: true})}
+                    {...register('description', { required: true })}
                     rows={5}
                     className={cn(
                       'w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
@@ -253,11 +265,10 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                     placeholder="Descripción del producto"
                   />
                   {errors.description && (
-                      <p className="text-red-500 text-sm">
-                        {errors.description.message || 'La descripción es requerida.'}
-                      </p>
-                    )
-                  }
+                    <p className="text-red-500 text-sm">
+                      {'La descripción es requerida.'}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -273,13 +284,12 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                   {availableSizes.map((size) => (
                     <span
                       key={size}
-                      className={
-                        cn("inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200",
-                          {
-                            'hidden': !selectedSizes.includes(size),
-                          }
-                        )
-                      }
+                      className={cn(
+                        'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200',
+                        {
+                          hidden: !selectedSizes.includes(size),
+                        }
+                      )}
                     >
                       {size}
                       <button
@@ -345,17 +355,15 @@ export const ProductForm = ({ title, subTitle, product, onSubmit, isPending }: P
                     ref={labelInputRef}
                     type="text"
                     onKeyDown={(e) => {
-                        if ( e.key === 'Enter' || e.key === ' ' || e.key === ',' ) {
-                          e.preventDefault();
-                          addTag();
-                          labelInputRef.current!.value = '';
-                        }
-                      } 
-                    }
+                      if (e.key === 'Enter' || e.key === ' ' || e.key === ',') {
+                        e.preventDefault();
+                        addTag();
+                        labelInputRef.current!.value = '';
+                      }
+                    }}
                     placeholder="Añadir nueva etiqueta..."
                     className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   />
-                  {/* TODO: */}
                   <Button onClick={addTag} className="px-4 py-2rounded-lg ">
                     <Plus className="h-4 w-4" />
                   </Button>
