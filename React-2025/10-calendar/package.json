@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.15.0",
     "date-fns": "^4.4.0",
     "react": "^19.3.1",
     "react-big-calendar": "^1.20.0",
     "react-datepicker": "^9.1.0",
     "react-dom": "^19.3.1",
     "react-modal": "^3.16.3",
+    "react-redux": "^9.3.1",
     "react-router-dom": "6",
     "sweetalert2": "^11.26.25"
   },
